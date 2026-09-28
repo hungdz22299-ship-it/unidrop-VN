@@ -11,11 +11,38 @@ export type TransactionType = 'topup' | 'purchase' | 'refund';
 export interface Transaction { id: string; userId: string; type: TransactionType; amount: number; description: string; orderId?: string; createdAt: string; balanceAfter?: number; }
 export interface Promotion { id: string; code: string; description: string; discountType: 'percent' | 'fixed'; discountValue: number; minOrder: number; maxDiscount?: number; startDate: string; endDate: string; active: boolean; usedCount: number; }
 
+export interface CartItem {
+  productId: string;
+  name: string;
+  price: number;
+  image: string;
+  quantity: number;
+
+  // sản phẩm thường hoặc combo
+  kind?: 'product' | 'combo';
+
+  // thông tin combo
+  comboId?: string;
+  comboItems?: ComboItem[];
+}
 export interface ComboItem {
   productId: string;
   name: string;
   price: number;
-  image: string;    
-  images: string[];
+  image: string;
+  images?: string[];
   quantity: number;
-}export interface Combo { id: string; name: string; slug: string; description: string; image: string; items: ComboItem[]; price: number; originalPrice?: number; active: boolean; createdAt: string; }
+}
+
+export interface Combo {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  image: string;
+  items: ComboItem[];
+  price: number;
+  originalPrice?: number;
+  active: boolean;
+  createdAt: string;
+}
